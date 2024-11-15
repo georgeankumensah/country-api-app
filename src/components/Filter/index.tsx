@@ -18,7 +18,7 @@ const Filter = () => {
       <select
         value={region}
         onChange={(e) => setRegion(e.target.value)}
-        className="w-[200px] h-[48px] rounded-[5px] shadow-md shadow-black/5 px-[19px] bg-white text-[12px] font-[400] leading-[20px] text-[#111517]"
+        className="w-[200px] h-[48px] rounded-[5px] shadow-md shadow-black/5 px-[19px] bg-white text-[12px] lg:text-[14px] font-[400] leading-[20px] text-[#111517]"
       >
         <option value="all">Filter by Region</option>
         <option value="Africa">Africa</option>

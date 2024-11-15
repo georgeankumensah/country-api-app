@@ -8,11 +8,11 @@ const Home = () => {
 
   return (
     <div className="container ">
-      <div className="flex flex-col mt-[24px] gap-y-[40px]">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center mt-[24px] lg:mt-[48px] gap-y-[40px]">
         <SearchBar />
         <Filter />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mt-[32px] gap-y-[40px] place-items-center ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-[32px] lg:mt-[48px] gap-y-[40px] lg:gap-[75px] place-items-center ">
         {isLoading && <p className="text-center font-bold text-2xl ">fetching countries data</p>}
         {!isLoading &&
           countries != null && !error &&

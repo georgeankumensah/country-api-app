@@ -1,6 +1,11 @@
 import Icons from "../../assets";
+import useThemeStore from "../../store/useThemeStore";
 
 const ThemeToggle = () => {
+  const { theme, toggleTheme } = useThemeStore();
+
+  console.log({ theme });
+
   return (
     <button className="flex items-center gap-x-[8px]">
       <img

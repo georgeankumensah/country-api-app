@@ -1,6 +1,5 @@
 import { create } from "zustand";
-
-const localStorageKey = "theme";
+import { persist } from "zustand/middleware";
 
 interface ITheme {
   darkMode: boolean;
@@ -9,14 +8,13 @@ interface ITheme {
   toggleTheme: () => void;
 }
 
-const useThemeStore = create<ITheme>((set) => ({
-  darkMode: localStorage.getItem(localStorageKey) === "dark",
-  theme: localStorage.getItem(localStorageKey),
+const themeStore = create<ITheme>((set) => ({
+  darkMode: false,
+  theme: "light",
   loadTheme: () => {
     set((state) => {
       const darkMode = state.darkMode;
       document.documentElement.classList.toggle("dark", darkMode);
-      localStorage.setItem(localStorageKey, darkMode ? "dark" : "light");
       return { darkMode: darkMode, theme: darkMode ? "dark" : "light" };
     });
   },
@@ -24,12 +22,11 @@ const useThemeStore = create<ITheme>((set) => ({
     set((state) => {
       const newDarkMode = !state.darkMode;
       document.documentElement.classList.toggle("dark", newDarkMode);
-      localStorage.setItem(localStorageKey, newDarkMode ? "dark" : "light");
       return { darkMode: newDarkMode, theme: newDarkMode ? "dark" : "light" };
     });
   },
 }));
 
-export default useThemeStore;
+const useThemeStore = persist(themeStore, { name: "theme" });
 
-// ))
+export default useThemeStore;
