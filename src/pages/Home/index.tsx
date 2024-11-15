@@ -1,28 +1,25 @@
-import { useEffect } from "react";
 import CountryCard from "../../components/CountryCard";
 import Filter from "../../components/Filter";
 import SearchBar from "../../components/SearchBar";
 import useCountriesStore from "../../store/useCountriesStore";
 
 const Home = () => {
-  const { isLoading, countries,fetchCountries } = useCountriesStore();
+  const { isLoading, countries,error } = useCountriesStore();
 
-  useEffect(() => {
-    fetchCountries();
-  }, [fetchCountries]);
-
-  
   return (
-    <div className="container">
+    <div className="container ">
       <div className="flex flex-col mt-[24px] gap-y-[40px]">
         <SearchBar />
         <Filter />
       </div>
-      <div className="grid grid-cols-1 mt-[32px] gap-y-[40px]">
-        {isLoading && <p>fetching countries data</p>}
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mt-[32px] gap-y-[40px] place-items-center ">
+        {isLoading && <p className="text-center font-bold text-2xl ">fetching countries data</p>}
         {!isLoading &&
-          countries != null &&
-          countries.map((country,idx) => <CountryCard key={idx} country={country}  />)}
+          countries != null && !error &&
+          countries.map((country, idx) => (
+            <CountryCard key={idx} country={country} />
+          ))}
+          {!isLoading && error && <p className="text-center font-bold text-2xl"> {error}</p>}
       </div>
     </div>
   );
